@@ -1,68 +1,59 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/slices/authSlice";
-import { useSelector } from "react-redux";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const Login = () => {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login(credentials));
+
+  // Define Yup validation schema
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: yup
+      .string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  // Form submission handler
+  const onSubmit = (data) => {
+    dispatch(login(data));
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={credentials.email}
-        onChange={(e) =>
-          setCredentials({ ...credentials, email: e.target.value })
-        }
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={credentials.password}
-        onChange={(e) =>
-          setCredentials({ ...credentials, password: e.target.value })
-        }
-      />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <input type="email" placeholder="Email" {...register("email")} />
+        {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+      </div>
+      <div>
+        <input
+          type="password"
+          placeholder="Password"
+          {...register("password")}
+        />
+        {errors.password && (
+          <p style={{ color: "red" }}>{errors.password.message}</p>
+        )}
+      </div>
       <button type="submit">Login</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 };
+
 export default Login;
-
-// const Login = () => {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const dispatch = useDispatch();
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     dispatch(login({ email }));
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input
-//         type="email"
-//         placeholder="Email"
-//         value={email}
-//         onChange={(e) => setEmail(e.target.value)}
-//       />
-//       <input
-//         type="password"
-//         placeholder="Password"
-//         value={password}
-//         onChange={(e) => setPassword(e.target.value)}
-//       />
-//       <button type="submit">Login</button>
-//     </form>
-//   );
-// };
-
-// export default Login;

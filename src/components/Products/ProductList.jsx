@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../../redux/slices/productSlice";
 import ProductCard from "./ProductCard";
 import { useEffect } from "react";
+import AuthStatus from "../Auth/AuthStatus";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,8 @@ const ProductList = () => {
 
   return (
     <div>
+      <AuthStatus />
+
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

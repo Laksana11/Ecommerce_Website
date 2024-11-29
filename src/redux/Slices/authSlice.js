@@ -29,6 +29,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("authUser")) || null,
+  feedback: null, // Feedback message
   error: null,
 };
 
@@ -41,6 +42,7 @@ const authSlice = createSlice({
       users.push(action.payload);
       localStorage.setItem("users", JSON.stringify(users));
       state.user = action.payload;
+      state.feedback = "Signup successful!";
       state.error = null;
     },
     login: (state, action) => {
@@ -54,6 +56,7 @@ const authSlice = createSlice({
       if (foundUser) {
         localStorage.setItem("authUser", JSON.stringify(foundUser));
         state.user = foundUser;
+        state.feedback = "Login successful!";
         state.error = null;
       } else {
         state.error = "Invalid email or password";
@@ -64,8 +67,11 @@ const authSlice = createSlice({
       state.user = null;
       state.error = null;
     },
+    clearFeedback: (state) => {
+      state.feedback = null;
+    },
   },
 });
 
-export const { signup, login, logout } = authSlice.actions;
+export const { signup, login, logout, clearFeedback } = authSlice.actions;
 export default authSlice.reducer;
