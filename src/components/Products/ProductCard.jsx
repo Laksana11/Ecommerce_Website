@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/slices/cartSlice";
+import { addToCart, removeFromCart } from "../../redux/slices/cartSlice";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import {
   Card,
   CardContent,
@@ -10,11 +12,15 @@ import {
   IconButton,
 } from "@mui/material";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, isCart }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
+  };
+
+  const handelDeleteCard = () => {
+    dispatch(removeFromCart(product.id));
   };
 
   return (
@@ -50,13 +56,23 @@ const ProductCard = ({ product }) => {
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
-        <IconButton
-          color="primary"
-          onClick={handleAddToCart}
-          title="Add to Cart"
-        >
-          <ShoppingCartIcon />
-        </IconButton>
+        {!isCart ? (
+          <IconButton
+            color="primary"
+            onClick={handleAddToCart}
+            title="Add to Cart"
+          >
+            <ShoppingCartIcon />
+          </IconButton>
+        ) : (
+          <IconButton
+            color="primary"
+            onClick={handelDeleteCard}
+            title="Delete Cart"
+          >
+            <DeleteIcon />
+          </IconButton>
+        )}
       </CardActions>
     </Card>
   );
