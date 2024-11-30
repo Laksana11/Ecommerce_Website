@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Iphone16 from "../../Assets/Iphone 16.jpg";
+import Iphone16 from "../../assets/Iphone 16.jpg";
 import {
   Box,
   Grid,
@@ -13,8 +13,8 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import GalaxyBuds from "../../Assets/Samsung Galaxy Buds Live.jpg";
-import Xbox from "../../Assets/Xbox Stero Headset.jpg";
+import GalaxyBuds from "../../assets/Samsung Galaxy Buds Live.jpg";
+import Xbox from "../../assets/Xbox Stero Headset.jpg";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import ProductCard from "./ProductCard";
@@ -26,7 +26,7 @@ const ProductList = () => {
   const products = [
     {
       id: 1,
-      name: "Product 1",
+      name: "Iphone 16",
       price: 25.0,
       description: "This is the description for Product 1.",
       image: Iphone16,
@@ -34,7 +34,7 @@ const ProductList = () => {
     },
     {
       id: 2,
-      name: "Product 2",
+      name: "Samsung buds 2",
       price: 40.0,
       description: "This is the description for Product 2.",
       image: GalaxyBuds,
@@ -42,7 +42,7 @@ const ProductList = () => {
     },
     {
       id: 3,
-      name: "Product 3",
+      name: "XBox Headset",
       price: 30.0,
       description: "This is the description for Product 3.",
       image: Xbox,
@@ -50,8 +50,8 @@ const ProductList = () => {
     },
     {
       id: 4,
-      name: "Product 4",
-      price: 30.0,
+      name: "XBox Headset 2",
+      price: 50.0,
       description: "This is the description for Product 3.",
       image: Xbox,
       category: "Laptop",

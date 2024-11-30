@@ -7,11 +7,11 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Signup from "./components/Auth/Signup";
-import Login from "./components/Auth/Login";
-import ProductList from "./components/Products/ProductList";
-import Cart from "./components/Cart/Cart";
-import CartSummary from "./components/Cart/CartSummary";
+import Signup from "./components/authentication/Signup";
+import Login from "./components/authentication/Login";
+import ProductList from "./components/product/ProductList";
+import Cart from "./components/cartComponents/Cart";
+import CartSummary from "./components/cartComponents/CartSummary";
 
 const App = () => {
   const user = useSelector((state) => state.auth.user);
