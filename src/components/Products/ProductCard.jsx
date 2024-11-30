@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/slices/cartSlice";
+import { addToCart } from "../../redux/slice/cartSlice";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   Card,

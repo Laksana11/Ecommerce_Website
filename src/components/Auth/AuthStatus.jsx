@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../redux/slices/authSlice";
+import { logout } from "../../redux/slice/authSlice";
 
 const AuthStatus = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
