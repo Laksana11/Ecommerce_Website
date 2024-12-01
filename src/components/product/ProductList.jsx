@@ -65,7 +65,6 @@ const ProductList = () => {
   const uniqueCategories = Array.from(new Set(products.map((p) => p.category)));
 
   useEffect(() => {
-    // Filter products dynamically based on the search term and category
     let filtered = products;
 
     if (searchTerm.trim() !== "") {
@@ -89,7 +88,7 @@ const ProductList = () => {
     }
 
     setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory, products]);
+  }, [searchTerm, selectedCategory]); // Fixed dependencies array
 
   return (
     <div>
