@@ -18,6 +18,13 @@ import Xbox from "../../assets/Xbox Stero Headset.jpg";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import ProductCard from "./ProductCard";
+import Heels from "../../assets/Heels.jpg";
+import Dell from "../../assets/Dell.jpg";
+import Handbag1 from "../../assets/Fashionable Design.jpg";
+import Handbag2 from "../../assets/Leather Handbag.jpg";
+import Shoes1 from "../../assets/Shoes1.jpg";
+import Handbag3 from "../../assets/Luxury Handbag.jpg";
+import Lenova from "../../assets/Lenova Laptop.jpg";
 
 const ProductList = () => {
   const { register, watch } = useForm();
@@ -50,10 +57,58 @@ const ProductList = () => {
     },
     {
       id: 4,
-      name: "XBox Headset 2",
+      name: "Lenova",
       price: 50.0,
       description: "This is the description for Product 3.",
-      image: Xbox,
+      image: Lenova,
+      category: "Laptop",
+    },
+    {
+      id: 5,
+      name: "Heels",
+      price: 40.0,
+      description: "This is the description for Product 2.",
+      image: Heels,
+      category: "Shoes",
+    },
+    {
+      id: 6,
+      name: "Handbag2",
+      price: 30.0,
+      description: "This is the description for Product 3.",
+      image: Handbag2,
+      category: "Handbag",
+    },
+    {
+      id: 7,
+      name: "Handbag3",
+      price: 30.0,
+      description: "This is the description for Product 3.",
+      image: Handbag3,
+      category: "Handbag",
+    },
+    {
+      id: 8,
+      name: "Shoes1",
+      price: 30.0,
+      description: "This is the description for Product 3.",
+      image: Shoes1,
+      category: "Shoe",
+    },
+    {
+      id: 9,
+      name: "Handbag1",
+      price: 50.0,
+      description: "This is the description for Product 3.",
+      image: Handbag1,
+      category: "Handbag",
+    },
+    {
+      id: 10,
+      name: "Dell",
+      price: 30.0,
+      description: "This is the description for Product 3.",
+      image: Dell,
       category: "Laptop",
     },
   ];

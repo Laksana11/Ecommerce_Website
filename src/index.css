@@ -13,16 +13,24 @@ code {
 }
 
 :root {
-  --background: white;
-  --text-primary: black;
-  --text-secondary: #a40c22;
-  --accent: purple;
+  --background: #9b1313;
+  --background-secondary: #000000;
+  --body: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: #9b1313;
+  --card-background: #ffffff;
+  --card-text: #000000;
+  --accent: #000000;
 }
 [data-theme="dark"] {
-  --background: black;
-  --text-primary: white;
-  --text-secondary: grey;
-  --accent: darkred;
+  --background: #2b2a2a;
+  --background-secondary: #9b1313;
+  --body: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #000000;
+  --card-background: #ffffff3d;
+  --card-text: #ffffff;
+  --accent: #9b1313;
 }
 
 /* Container styles */

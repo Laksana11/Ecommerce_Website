@@ -31,6 +31,9 @@ const ProductCard = ({ product, isCart }) => {
         textAlign: "center",
         boxShadow: 3,
         borderRadius: 2,
+        backgroundColor: "var(--card-background)",
+        color: "var(--card-text)",
+        padding: "20px",
       }}
     >
       <img
@@ -48,9 +51,7 @@ const ProductCard = ({ product, isCart }) => {
         <Typography variant="h6" gutterBottom>
           {product.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {product.description}
-        </Typography>
+        <Typography variant="body2">{product.description}</Typography>
         <Typography variant="body1" sx={{ mt: 1 }}>
           {product.price}
         </Typography>
@@ -58,7 +59,9 @@ const ProductCard = ({ product, isCart }) => {
       <CardActions sx={{ justifyContent: "center" }}>
         {!isCart ? (
           <IconButton
-            color="primary"
+            sx={{
+              color: "#9b1313",
+            }}
             onClick={handleAddToCart}
             title="Add to Cart"
           >
