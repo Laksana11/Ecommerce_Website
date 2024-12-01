@@ -76,7 +76,7 @@ const Header = () => {
               <Button component={Link} to="/login" color="inherit">
                 Login
               </Button>
-              <Button component={Link} to="/register" color="inherit">
+              <Button component={Link} to="/signup" color="inherit">
                 Register
               </Button>
             </>

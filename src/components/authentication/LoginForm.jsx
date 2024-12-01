@@ -4,22 +4,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/slices/authSlice";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  Container,
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Grid,
+} from "@mui/material";
+
+// Define Yup validation schema
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/,
+      "Password must be at least 8 characters and include uppercase, lowercase, and special characters."
+    ),
+});
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
-
-  // Define Yup validation schema
-  const schema = yup.object().shape({
-    email: yup
-      .string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    password: yup
-      .string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-  });
 
   const {
     register,
@@ -29,30 +40,87 @@ const LoginForm = () => {
     resolver: yupResolver(schema),
   });
 
-  // Form submission handler
   const onSubmit = (data) => {
     dispatch(login(data));
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <input type="email" placeholder="Email" {...register("email")} />
-        {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
-      </div>
-      <div>
-        <input
-          type="password"
-          placeholder="Password"
-          {...register("password")}
-        />
-        {errors.password && (
-          <p style={{ color: "red" }}>{errors.password.message}</p>
-        )}
-      </div>
-      <button type="submit">Login</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </form>
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          marginTop: 8,
+          padding: 4,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: "#fff",
+          textAlign: "center",
+        }}
+      >
+        <Typography variant="h4" component="h1" gutterBottom>
+          Login
+        </Typography>
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ mt: 2, width: "100%" }}
+        >
+          {/* Email Field */}
+          <TextField
+            label="Email"
+            type="email"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            {...register("email")}
+            error={!!errors.email}
+            helperText={errors.email?.message}
+          />
+
+          {/* Password Field */}
+          <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            {...register("password")}
+            error={!!errors.password}
+            helperText={errors.password?.message}
+          />
+
+          {/* Error Message */}
+          {error && (
+            <Typography
+              variant="body2"
+              color="error"
+              sx={{ mt: 1, mb: 2, textAlign: "left" }}
+            >
+              {error}
+            </Typography>
+          )}
+
+          {/* Submit Button */}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Login
+          </Button>
+        </Box>
+
+        <Grid container justifyContent="flex-end">
+          <Grid item>
+            <Typography variant="body2" component="p">
+              Don't have an account? <a href="/signup">Signup</a>
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 
