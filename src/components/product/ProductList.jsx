@@ -97,6 +97,8 @@ const ProductList = () => {
         container
         xs={12}
         md={7}
+        mt={3}
+        padding={2}
         justifyContent="center"
         alignItems="center"
         spacing={2}

@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import ProductList from "../components/product/ProductList";
 import Cart from "../components/cartComponents/Cart";
 import CartSummary from "../components/cartComponents/CartSummary";
-import Signup from "../components/authentication/Signup";
-import Login from "../components/authentication/Login";
-import HomePage from "../components/HomePage";
+import Signup from "../pages/Signup";
+import Login from "../pages/Login";
+import HomePage from "../pages/HomePage";
 
 const Routing = () => {
   const user = useSelector((state) => state.auth.user);

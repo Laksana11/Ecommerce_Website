@@ -5,7 +5,7 @@ import { login } from "../../redux/slices/authSlice";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const Login = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
 
@@ -56,4 +56,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;

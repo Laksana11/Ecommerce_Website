@@ -18,7 +18,7 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
-const Signup = () => {
+const SignupForm = () => {
   const dispatch = useDispatch();
   const {
     register,
@@ -62,4 +62,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupForm;
