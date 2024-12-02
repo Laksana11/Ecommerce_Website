@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Iphone16 from "../../assets/Iphone 16.jpg";
 import {
   Box,
-  Grid,
+  Grid2,
   InputAdornment,
   MenuItem,
   TextField,
-  Tooltip,
-  useMediaQuery,
   Select,
   FormControl,
   InputLabel,
+  Typography,
+  Menu,
 } from "@mui/material";
-import GalaxyBuds from "../../assets/Samsung Galaxy Buds Live.jpg";
-import Xbox from "../../assets/Xbox Stero Headset.jpg";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import ProductCard from "./ProductCard";
+import Iphone16 from "../../assets/Iphone 16.jpg";
+import GalaxyBuds from "../../assets/Samsung Galaxy Buds Live.jpg";
+import Xbox from "../../assets/Xbox Stero Headset.jpg";
 import Heels from "../../assets/Heels.jpg";
 import Dell from "../../assets/Dell.jpg";
 import Handbag1 from "../../assets/Fashionable Design.jpg";
@@ -29,53 +29,43 @@ import Lenova from "../../assets/Lenova Laptop.jpg";
 const ProductList = () => {
   const { register, watch } = useForm();
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [subAnchorEl, setSubAnchorEl] = useState(null);
+  const [hoveredMainCategory, setHoveredMainCategory] = useState("");
+
+  const categories = {
+    Electronics: ["Laptop", "Mobile", "Headset"],
+    Fashion: ["Handbag", "Shoes"],
+  };
 
   const products = [
     {
       id: 1,
       name: "Iphone 16",
       price: 25.0,
-      description: "This is the description for Product 1.",
       image: Iphone16,
       category: "Mobile",
     },
     {
       id: 2,
-      name: "Samsung buds 2",
+      name: "Samsung Buds 2",
       price: 40.0,
-      description: "This is the description for Product 2.",
       image: GalaxyBuds,
       category: "Headset",
     },
     {
       id: 3,
-      name: "XBox Headset",
+      name: "Xbox Headset",
       price: 30.0,
-      description: "This is the description for Product 3.",
       image: Xbox,
       category: "Headset",
     },
-    {
-      id: 4,
-      name: "Lenova",
-      price: 50.0,
-      description: "This is the description for Product 3.",
-      image: Lenova,
-      category: "Laptop",
-    },
-    {
-      id: 5,
-      name: "Heels",
-      price: 40.0,
-      description: "This is the description for Product 2.",
-      image: Heels,
-      category: "Shoes",
-    },
+    { id: 4, name: "Lenova", price: 50.0, image: Lenova, category: "Laptop" },
+    { id: 5, name: "Heels", price: 40.0, image: Heels, category: "Shoes" },
     {
       id: 6,
       name: "Handbag2",
       price: 30.0,
-      description: "This is the description for Product 3.",
       image: Handbag2,
       category: "Handbag",
     },
@@ -83,52 +73,31 @@ const ProductList = () => {
       id: 7,
       name: "Handbag3",
       price: 30.0,
-      description: "This is the description for Product 3.",
       image: Handbag3,
       category: "Handbag",
     },
-    {
-      id: 8,
-      name: "Shoes1",
-      price: 30.0,
-      description: "This is the description for Product 3.",
-      image: Shoes1,
-      category: "Shoe",
-    },
+    { id: 8, name: "Shoes1", price: 30.0, image: Shoes1, category: "Shoes" },
     {
       id: 9,
       name: "Handbag1",
       price: 50.0,
-      description: "This is the description for Product 3.",
       image: Handbag1,
       category: "Handbag",
     },
-    {
-      id: 10,
-      name: "Dell",
-      price: 30.0,
-      description: "This is the description for Product 3.",
-      image: Dell,
-      category: "Laptop",
-    },
+    { id: 10, name: "Dell", price: 30.0, image: Dell, category: "Laptop" },
   ];
 
-  const searchTerm = watch("search") || ""; // Get the search input value
-  const selectedCategory = watch("category") || ""; // Get the selected category
-
-  // Extract unique categories from the product list
-  const uniqueCategories = Array.from(new Set(products.map((p) => p.category)));
+  const searchTerm = watch("search") || "";
+  const selectedCategory = watch("category") || "";
 
   useEffect(() => {
     let filtered = products;
 
     if (searchTerm.trim() !== "") {
       if (!isNaN(searchTerm)) {
-        // Filter by price
         const priceFilter = parseFloat(searchTerm);
         filtered = filtered.filter((product) => product.price <= priceFilter);
       } else {
-        // Filter by name
         const nameFilter = searchTerm.toLowerCase();
         filtered = filtered.filter((product) =>
           product.name.toLowerCase().includes(nameFilter)
@@ -143,25 +112,33 @@ const ProductList = () => {
     }
 
     setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory]); // Fixed dependencies array
+  }, [searchTerm, selectedCategory]);
+
+  const handleMainCategoryHover = (event, mainCategory) => {
+    setAnchorEl(event.currentTarget);
+    setHoveredMainCategory(mainCategory);
+  };
+
+  const handleSubCategoryHover = (event) => {
+    setSubAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setSubAnchorEl(null);
+    setHoveredMainCategory("");
+  };
 
   return (
-    <div>
-      <Grid
-        item
+    <Box sx={{ p: 2 }}>
+      <Grid2
         container
-        xs={12}
-        md={7}
-        mt={3}
-        padding={2}
-        justifyContent="center"
-        alignItems="center"
         spacing={2}
+        sx={{ justifyContent: "center", alignItems: "center", mb: 2 }}
       >
-        {/* Search Input */}
-        <Grid item xs={12} sm={6}>
+        <Grid2 item xs={6} sm={6}>
           <TextField
-            InputProps={{
+            InputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon />
@@ -174,17 +151,13 @@ const ProductList = () => {
             fullWidth
             variant="outlined"
           />
-        </Grid>
+        </Grid2>
 
-        {/* Category Dropdown */}
-        <Grid item xs={12} sm={6}>
+        <Grid2 item xs={6} sm={6}>
           <FormControl fullWidth>
             <InputLabel htmlFor="category-select">
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <FilterAltIcon
-                  fontSize="small"
-                  style={{ marginRight: "8px" }}
-                />
+                <FilterAltIcon fontSize="small" sx={{ mr: 1 }} />
                 Category
               </Box>
             </InputLabel>
@@ -194,34 +167,48 @@ const ProductList = () => {
               label="Category"
             >
               <MenuItem value="">All Categories</MenuItem>
-              {uniqueCategories.map((category) => (
-                <MenuItem key={category} value={category}>
-                  {category}
+              {Object.keys(categories).map((mainCategory) => (
+                <MenuItem
+                  key={mainCategory}
+                  onMouseEnter={(e) => handleMainCategoryHover(e, mainCategory)}
+                >
+                  {mainCategory}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
-      {/* Product List */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          marginTop: "20px",
-        }}
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        onMouseLeave={handleClose}
       >
+        {categories[hoveredMainCategory]?.map((subCategory) => (
+          <MenuItem key={subCategory} onMouseEnter={handleSubCategoryHover}>
+            {subCategory}
+          </MenuItem>
+        ))}
+      </Menu>
+
+      <Grid2 container spacing={2} justifyContent="center" alignItems="center">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} isCart={false} />
+            <Grid2 item xs={12} sm={6} md={3} key={product.id}>
+              <ProductCard product={product} isCart={false} />
+            </Grid2>
           ))
         ) : (
-          <p>No products found</p>
+          <Grid2 item xs={12}>
+            <Typography sx={{ mt: 2, textAlign: "center" }}>
+              No products found
+            </Typography>
+          </Grid2>
         )}
-      </div>
-    </div>
+      </Grid2>
+    </Box>
   );
 };
 

@@ -10,10 +10,9 @@ import {
   Button,
   Typography,
   Container,
-  Grid,
+  Grid2,
 } from "@mui/material";
 
-// Validation schema using Yup
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -35,12 +34,12 @@ const SignupForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema), // Integrates Yup validation
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
     dispatch(signup(data));
-    reset(); // Resets the form after submission
+    reset();
   };
 
   return (
@@ -66,7 +65,6 @@ const SignupForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           sx={{ mt: 1, width: "100%" }}
         >
-          {/* Name Field */}
           <TextField
             label="Name"
             variant="outlined"
@@ -77,7 +75,6 @@ const SignupForm = () => {
             helperText={errors.name?.message}
           />
 
-          {/* Email Field */}
           <TextField
             label="Email"
             type="email"
@@ -89,7 +86,6 @@ const SignupForm = () => {
             helperText={errors.email?.message}
           />
 
-          {/* Password Field */}
           <TextField
             label="Password"
             type="password"
@@ -101,7 +97,6 @@ const SignupForm = () => {
             helperText={errors.password?.message}
           />
 
-          {/* Submit Button */}
           <Button
             type="submit"
             fullWidth
@@ -113,13 +108,13 @@ const SignupForm = () => {
           </Button>
         </Box>
 
-        <Grid container justifyContent="flex-end">
-          <Grid item>
+        <Grid2 container justifyContent="flex-end">
+          <Grid2 item>
             <Typography variant="body2" component="p">
               Already have an account? <a href="/login">Login</a>
             </Typography>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Box>
     </Container>
   );

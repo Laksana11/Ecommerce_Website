@@ -79,12 +79,11 @@ const Header = () => {
           </IconButton>
           {user ? (
             <>
-              {/* User Icon and Name */}
               <IconButton onClick={handleMenuOpen} color="inherit">
                 <AccountCircle />
               </IconButton>
               <Typography variant="body1">{user.name}</Typography>
-              {/* Menu for Logout */}
+
               <Menu
                 anchorEl={anchorEl}
                 open={isMenuOpen}
@@ -112,7 +111,6 @@ const Header = () => {
             </>
           )}
 
-          {/* Cart Icon - Visible Only if User is Logged In */}
           {user && (
             <Link to="/cart">
               <IconButton color="inherit">

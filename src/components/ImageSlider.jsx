@@ -31,8 +31,9 @@ const ImageSlider = () => {
       sx={{
         position: "relative",
         width: "100%",
-        maxWidth: "2000px",
+        maxWidth: "100vw",
         margin: "auto",
+        overflow: "hidden",
       }}
     >
       <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -41,8 +42,10 @@ const ImageSlider = () => {
           src={images[currentIndex]}
           alt="Slider Image"
           sx={{
-            width: "auto",
-            height: "500px",
+            width: "100%", // Make image fill the width of the container
+            height: "auto",
+            maxHeight: "450px", // Set a fixed height
+            objectFit: "contain", // Ensures the image covers the container without overflow
             borderRadius: "8px",
           }}
         />

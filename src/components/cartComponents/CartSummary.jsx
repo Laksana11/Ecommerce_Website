@@ -41,7 +41,6 @@ const CartSummary = () => {
           <Grid container spacing={2}>
             {cart.map((item) => (
               <React.Fragment key={item.id}>
-                {/* Icon/Thumbnail */}
                 <Grid item xs={2} textAlign="center">
                   <img
                     src={item.image}
@@ -55,7 +54,6 @@ const CartSummary = () => {
                   />
                 </Grid>
 
-                {/* Description */}
                 <Grid item xs={4}>
                   <Typography variant="body1" fontWeight="bold">
                     {item.name}
@@ -65,7 +63,6 @@ const CartSummary = () => {
                   </Typography>
                 </Grid>
 
-                {/* Quantity */}
                 <Grid item xs={3} textAlign="center">
                   <IconButton
                     size="small"
@@ -88,7 +85,6 @@ const CartSummary = () => {
                   </IconButton>
                 </Grid>
 
-                {/* Price and Remove */}
                 <Grid item xs={3} textAlign="center">
                   <Typography variant="body1" fontWeight="bold">
                     ${item.price * item.quantity}
@@ -104,7 +100,6 @@ const CartSummary = () => {
             ))}
           </Grid>
 
-          {/* Total Price */}
           <Box mt={4} textAlign="right">
             <Typography variant="h6">
               Total: ${totalPrice.toFixed(2)}

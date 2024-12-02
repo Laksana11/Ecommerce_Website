@@ -33,7 +33,6 @@ code {
   --accent: #9b1313;
 }
 
-/* Container styles */
 .cart-container {
   width: 400px;
   margin: 40px auto;
@@ -44,7 +43,6 @@ code {
   font-family: Arial, sans-serif;
 }
 
-/* Title */
 .cart-title {
   font-size: 20px;
   font-weight: bold;
@@ -53,7 +51,6 @@ code {
   text-align: center;
 }
 
-/* Individual item styles */
 .cart-item {
   display: flex;
   justify-content: space-between;
@@ -99,7 +96,6 @@ code {
   color: #a40c22;
 }
 
-/* Actions and pricing */
 .item-actions {
   text-align: right;
 }
@@ -111,7 +107,6 @@ code {
   margin-bottom: 10px;
 }
 
-/* Quantity controls */
 .quantity-controls {
   display: flex;
   align-items: center;
@@ -142,7 +137,6 @@ code {
   height: 30px;
 }
 
-/* Footer */
 .cart-footer {
   display: flex;
   justify-content: space-between;
@@ -163,7 +157,6 @@ code {
   color: #333;
 }
 
-/* Checkout button */
 .checkout-btn {
   width: 100%;
   padding: 10px;

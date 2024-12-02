@@ -10,10 +10,9 @@ import {
   TextField,
   Button,
   Typography,
-  Grid,
+  Grid2,
 } from "@mui/material";
 
-// Define Yup validation schema
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -65,10 +64,9 @@ const LoginForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           sx={{ mt: 2, width: "100%" }}
         >
-          {/* Email Field */}
           <TextField
             label="Email"
-            type="email"
+            type="text"
             variant="outlined"
             fullWidth
             margin="normal"
@@ -77,7 +75,6 @@ const LoginForm = () => {
             helperText={errors.email?.message}
           />
 
-          {/* Password Field */}
           <TextField
             label="Password"
             type="password"
@@ -89,7 +86,6 @@ const LoginForm = () => {
             helperText={errors.password?.message}
           />
 
-          {/* Error Message */}
           {error && (
             <Typography
               variant="body2"
@@ -100,7 +96,6 @@ const LoginForm = () => {
             </Typography>
           )}
 
-          {/* Submit Button */}
           <Button
             type="submit"
             fullWidth
@@ -112,13 +107,13 @@ const LoginForm = () => {
           </Button>
         </Box>
 
-        <Grid container justifyContent="flex-end">
-          <Grid item>
+        <Grid2 container justifyContent="flex-end">
+          <Grid2 item>
             <Typography variant="body2" component="p">
               Don't have an account? <a href="/signup">Signup</a>
             </Typography>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Box>
     </Container>
   );

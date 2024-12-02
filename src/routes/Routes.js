@@ -1,13 +1,10 @@
-// routes/Routes.js
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ProductList from "../components/product/ProductList";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Cart from "../components/cartComponents/Cart";
-import CartSummary from "../components/cartComponents/CartSummary";
-import Signup from "../pages/Signup";
-import Login from "../pages/Login";
 import HomePage from "../pages/HomePage";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 
 const Routing = () => {
   const user = useSelector((state) => state.auth.user);
