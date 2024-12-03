@@ -27,11 +27,13 @@ import Handbag3 from "../../assets/Luxury Handbag.jpg";
 import Lenova from "../../assets/Lenova Laptop.jpg";
 
 const ProductList = () => {
-  const { register, watch } = useForm();
+  const { register, watch, setValue } = useForm();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [subAnchorEl, setSubAnchorEl] = useState(null);
   const [hoveredMainCategory, setHoveredMainCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const categories = {
     Electronics: ["Laptop", "Mobile", "Headset"],
@@ -42,53 +44,96 @@ const ProductList = () => {
     {
       id: 1,
       name: "Iphone 16",
-      price: 25.0,
+      price: 2500.0,
+      rating: 4.5,
+      description: "This is a great product.",
       image: Iphone16,
       category: "Mobile",
     },
     {
       id: 2,
       name: "Samsung Buds 2",
-      price: 40.0,
+      description: "This is a great product.",
+      rating: 3.5,
+      price: 4000.0,
       image: GalaxyBuds,
       category: "Headset",
     },
     {
       id: 3,
       name: "Xbox Headset",
-      price: 30.0,
+      description: "This is a great product.",
+      rating: 2.5,
+      price: 3000.0,
       image: Xbox,
       category: "Headset",
     },
-    { id: 4, name: "Lenova", price: 50.0, image: Lenova, category: "Laptop" },
-    { id: 5, name: "Heels", price: 40.0, image: Heels, category: "Shoes" },
+    {
+      id: 4,
+      name: "Lenova",
+      description: "This is a great product.",
+      rating: 4.5,
+      price: 5000.0,
+      image: Lenova,
+      category: "Laptop",
+    },
+    {
+      id: 5,
+      name: "Heels",
+      description: "This is a great product.",
+      rating: 4.0,
+      price: 4000.0,
+      image: Heels,
+      category: "Shoes",
+    },
     {
       id: 6,
       name: "Handbag2",
-      price: 30.0,
+      price: 3500.0,
       image: Handbag2,
+      description: "This is a great product.",
+      rating: 4.5,
       category: "Handbag",
     },
     {
       id: 7,
       name: "Handbag3",
-      price: 30.0,
+      price: 8000.0,
+      description: "This is a great product.",
+      rating: 3.0,
       image: Handbag3,
       category: "Handbag",
     },
-    { id: 8, name: "Shoes1", price: 30.0, image: Shoes1, category: "Shoes" },
+    {
+      id: 8,
+      name: "Shoes1",
+      price: 6500.0,
+      description: "This is a great product.",
+      rating: 4.5,
+      image: Shoes1,
+      category: "Shoes",
+    },
     {
       id: 9,
       name: "Handbag1",
-      price: 50.0,
+      price: 4670.0,
+      description: "This is a great product.",
+      rating: 4.5,
       image: Handbag1,
       category: "Handbag",
     },
-    { id: 10, name: "Dell", price: 30.0, image: Dell, category: "Laptop" },
+    {
+      id: 10,
+      name: "Dell",
+      description: "This is a great product.",
+      rating: 3.5,
+      price: 6450.0,
+      image: Dell,
+      category: "Laptop",
+    },
   ];
 
   const searchTerm = watch("search") || "";
-  const selectedCategory = watch("category") || "";
 
   useEffect(() => {
     let filtered = products;
@@ -105,22 +150,38 @@ const ProductList = () => {
       }
     }
 
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory !== "All Categories") {
       filtered = filtered.filter(
         (product) => product.category === selectedCategory
       );
     }
 
+    if (selectedSubCategory) {
+      filtered = filtered.filter(
+        (product) => product.category === selectedSubCategory
+      );
+    }
+
     setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, selectedSubCategory]);
 
   const handleMainCategoryHover = (event, mainCategory) => {
     setAnchorEl(event.currentTarget);
     setHoveredMainCategory(mainCategory);
   };
 
-  const handleSubCategoryHover = (event) => {
-    setSubAnchorEl(event.currentTarget);
+  const handleSubCategorySelect = (subCategory) => {
+    setSelectedSubCategory(subCategory);
+    setValue("category", subCategory);
+    setAnchorEl(null);
+  };
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+    if (category === "All Categories") {
+      setSelectedSubCategory("");
+    }
+    setValue("category", category);
   };
 
   const handleClose = () => {
@@ -136,9 +197,19 @@ const ProductList = () => {
         spacing={2}
         sx={{ justifyContent: "center", alignItems: "center", mb: 2 }}
       >
-        <Grid2 item xs={6} sm={6}>
+        <Grid2 item xs={6} sm={6} sx={{ width: "300px" }}>
           <TextField
-            InputAdornment={{
+            sx={{
+              border: "1px solid var(--card-text)",
+              "& .MuiInputBase-input": {
+                color: "var(--card-text)",
+              },
+              "& .MuiInputBase-input::placeholder": {
+                color: "var(--accent)",
+                opacity: 1,
+              },
+            }}
+            InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon />
@@ -154,10 +225,30 @@ const ProductList = () => {
         </Grid2>
 
         <Grid2 item xs={6} sm={6}>
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            sx={{
+              width: "300px",
+              "& .MuiInputLabel-root": {
+                color: "var(--accent)",
+              },
+              "& .MuiSelect-select": {
+                color: "var(--card-text)",
+              },
+              "& .MuiMenuItem-root": {
+                color: "var(--card-text)",
+              },
+              "& .MuiSelect-icon": {
+                color: "var(--card-text)",
+              },
+            }}
+          >
             <InputLabel htmlFor="category-select">
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <FilterAltIcon fontSize="small" sx={{ mr: 1 }} />
+                <FilterAltIcon
+                  fontSize="small"
+                  sx={{ mr: 1, color: "var(--card-text)" }}
+                />
                 Category
               </Box>
             </InputLabel>
@@ -165,11 +256,24 @@ const ProductList = () => {
               id="category-select"
               {...register("category")}
               label="Category"
+              value={
+                selectedSubCategory || selectedCategory || "All Categories"
+              }
+              sx={{
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "var(--accent)",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "var(--card-text)",
+                },
+              }}
+              onChange={(e) => handleCategorySelect(e.target.value)}
             >
-              <MenuItem value="">All Categories</MenuItem>
+              <MenuItem value="All Categories">All Categories</MenuItem>
               {Object.keys(categories).map((mainCategory) => (
                 <MenuItem
                   key={mainCategory}
+                  value={mainCategory}
                   onMouseEnter={(e) => handleMainCategoryHover(e, mainCategory)}
                 >
                   {mainCategory}
@@ -187,7 +291,10 @@ const ProductList = () => {
         onMouseLeave={handleClose}
       >
         {categories[hoveredMainCategory]?.map((subCategory) => (
-          <MenuItem key={subCategory} onMouseEnter={handleSubCategoryHover}>
+          <MenuItem
+            key={subCategory}
+            onClick={() => handleSubCategorySelect(subCategory)}
+          >
             {subCategory}
           </MenuItem>
         ))}

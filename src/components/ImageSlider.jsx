@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Slide, Box, IconButton } from "@mui/material";
 import { ArrowForward, ArrowBack } from "@mui/icons-material";
-import Banner1 from "../assets/banner1.jpg";
+
 import Ban1 from "../assets/ban1.jpg";
 import Ban2 from "../assets/ban2.jpg";
+import Ban5 from "../assets/ban5.jpg";
 
 const ImageSlider = () => {
-  const images = [Banner1, Ban1, Ban2];
+  const images = [Ban5, Ban1, Ban2];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -42,11 +43,11 @@ const ImageSlider = () => {
           src={images[currentIndex]}
           alt="Slider Image"
           sx={{
-            width: "100%", // Make image fill the width of the container
+            width: "100vw",
             height: "auto",
-            maxHeight: "450px", // Set a fixed height
-            objectFit: "contain", // Ensures the image covers the container without overflow
+            maxHeight: "450px",
             borderRadius: "8px",
+            objectFit: "cover",
           }}
         />
       </Slide>

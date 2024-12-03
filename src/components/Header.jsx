@@ -61,7 +61,6 @@ const Header = () => {
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        {/* Logo or App Name */}
         <Link to="/" style={{ textDecoration: "none" }}>
           <Typography
             variant="h6"
@@ -72,7 +71,7 @@ const Header = () => {
             E-Commerce App
           </Typography>
         </Link>
-        {/* Authentication and Cart Section */}
+
         <Box display="flex" alignItems="center" gap={2}>
           <IconButton onClick={toggleTheme} color="inherit">
             {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
@@ -118,8 +117,8 @@ const Header = () => {
                   badgeContent={cart.length}
                   sx={{
                     "& .MuiBadge-badge": {
-                      backgroundColor: "var(--background-secondary)", // Badge background color
-                      color: "white", // Badge text color
+                      backgroundColor: "var(--background-secondary)",
+                      color: "white",
                     },
                   }}
                 >

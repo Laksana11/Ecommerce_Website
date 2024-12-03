@@ -34,7 +34,7 @@ const Cart = () => {
         mt: 4,
         borderRadius: 2,
         boxShadow: 3,
-        bgcolor: "#f5f5f5", // Ash color for the outer box
+        bgcolor: "#f5f5f5",
       }}
     >
       <Typography variant="h5" fontWeight="bold" textAlign="center" mb={2}>
@@ -59,10 +59,10 @@ const Cart = () => {
           key={item.id}
           sx={{
             mb: 2,
-            backgroundColor: "white", // White background for each item
+            backgroundColor: "white",
             borderRadius: 2,
             padding: 2,
-            boxShadow: 2, // Subtle shadow for each item
+            boxShadow: 2,
           }}
         >
           <Box
@@ -182,18 +182,18 @@ const Cart = () => {
         </Typography>
       </Box>
       <Button
-        variant="outlined" // No background color for checkout button
+        variant="outlined"
         fullWidth
         sx={{
           mt: 2,
           background: "#b13b3b",
-          borderColor: "#b13b3b", // Red border color
-          color: "#fff", // Red text color
+          borderColor: "#b13b3b",
+          color: "#fff",
           "&:hover": {
             background: "#fff",
             borderColor: "#fff",
             color: "#b13b3b",
-          }, // Darker red on hover
+          },
         }}
       >
         Checkout

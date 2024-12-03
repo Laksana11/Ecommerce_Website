@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { signup } from "../../redux/slices/authSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import CryptoJS from "crypto-js";
 import {
   Box,
   TextField,
@@ -26,8 +27,6 @@ const schema = yup.object().shape({
 });
 
 const SignupForm = () => {
-  const dispatch = useDispatch();
-
   const {
     register,
     handleSubmit,
@@ -36,9 +35,16 @@ const SignupForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    dispatch(signup(data));
+  const onSubmit = async (data) => {
+    const hashedPassword = CryptoJS.AES.encrypt(
+      data.password,
+      process.env.REACT_APP_SECRET_KEY
+    ).toString();
+    const dataWithHashedPassword = { ...data, password: hashedPassword };
+
+    dispatch(signup(dataWithHashedPassword));
     reset();
   };
 
@@ -101,8 +107,7 @@ const SignupForm = () => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, backgroundColor: "var(--background)" }}
           >
             Signup
           </Button>
