@@ -1,69 +1,192 @@
 import React from "react";
-import { Box, Typography, Grid2, Link } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
+import Grid2 from "@mui/material/Grid2";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "var(--background-secondary)",
+        color: "var(--text-primary)",
         py: 4,
+        px: 2,
         mt: 4,
-        borderTop: "1px solid #ddd",
       }}
     >
-      <Grid2 container spacing={2} justifyContent="center" textAlign="center">
-        <Grid2 item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom>
-            About Us
+      <Grid2
+        container
+        spacing={4}
+        justifyContent="space-between"
+        textAlign={{ xs: "center", sm: "left" }}
+      >
+        {/* Company Section */}
+        <Grid2 xs={12} sm={6} md={3}>
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ color: "var(--text-secondary)", textAlign: "left" }}
+          >
+            Company
           </Typography>
-          <Typography variant="body2">
-            We offer the best products at the best prices. Your satisfaction is
-            our priority.
-          </Typography>
+          <Box sx={{ textAlign: "left" }}>
+            <Link href="/about" color="var(--text-primary)" underline="hover">
+              About Us
+            </Link>
+          </Box>
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/services"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Our Services
+            </Link>
+          </Box>
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/privacy-policy"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Privacy Policy
+            </Link>
+          </Box>
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/affiliate"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Affiliate Program
+            </Link>
+          </Box>
         </Grid2>
-        <Grid2 item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom>
-            Quick Links
+
+        {/* Get Help Section */}
+        <Grid2 xs={12} sm={6} md={3}>
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ color: "var(--text-secondary)", textAlign: "left" }}
+          >
+            Get Help
           </Typography>
-          <Box>
-            <Link href="/" color="inherit" underline="hover">
-              Home
+          <Box sx={{ textAlign: "left" }}>
+            <Link href="/faq" color="var(--text-primary)" underline="hover">
+              FAQ
             </Link>
           </Box>
-          <Box>
-            <Link href="/products" color="inherit" underline="hover">
-              Products
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/shipping"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Shipping
             </Link>
           </Box>
-          <Box>
-            <Link href="/contact" color="inherit" underline="hover">
-              Contact Us
+          <Box sx={{ textAlign: "left" }}>
+            <Link href="/returns" color="var(--text-primary)" underline="hover">
+              Returns
+            </Link>
+          </Box>
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/payment-options"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Payment Options
             </Link>
           </Box>
         </Grid2>
-        <Grid2 item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom>
+
+        {/* Online Shop Section */}
+        <Grid2 xs={12} sm={6} md={3}>
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ color: "var(--text-secondary)", textAlign: "left" }}
+          >
+            Online Shop
+          </Typography>
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/shop/watch"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Watch
+            </Link>
+          </Box>
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/shop/bag"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Bag
+            </Link>
+          </Box>
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/shop/shoes"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Shoes
+            </Link>
+          </Box>
+          <Box sx={{ textAlign: "left" }}>
+            <Link
+              href="/shop/dress"
+              color="var(--text-primary)"
+              underline="hover"
+            >
+              Dress
+            </Link>
+          </Box>
+        </Grid2>
+
+        {/* Follow Us Section */}
+        <Grid2 xs={12} sm={6} md={3}>
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ color: "var(--text-secondary)", textAlign: "left" }}
+          >
             Follow Us
           </Typography>
-          <Box>
-            <Link href="#" color="inherit" sx={{ mx: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "center", sm: "left" },
+              gap: 2,
+            }}
+          >
+            <Link href="#" color="inherit">
               <FacebookIcon />
             </Link>
-            <Link href="#" color="inherit" sx={{ mx: 1 }}>
+            <Link href="#" color="inherit">
               <TwitterIcon />
             </Link>
-            <Link href="#" color="inherit" sx={{ mx: 1 }}>
+            <Link href="#" color="inherit">
               <InstagramIcon />
+            </Link>
+            <Link href="#" color="inherit">
+              <LinkedInIcon />
             </Link>
           </Box>
         </Grid2>
       </Grid2>
+
       <Typography
         variant="body2"
-        sx={{ mt: 2, textAlign: "center", color: "#888" }}
+        sx={{ mt: 4, textAlign: "center", color: "var(--shade)" }}
       >
         © {new Date().getFullYear()} Your Company. All rights reserved.
       </Typography>

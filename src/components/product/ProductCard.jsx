@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { addToCart, removeFromCart } from "../../redux/slices/cartSlice";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Rating from "@mui/material/Rating";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -15,13 +16,14 @@ import {
 } from "@mui/material";
 
 const ProductCard = ({ product, isCart }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { setValue, watch } = useForm({
     defaultValues: {
       count: 0,
     },
   });
-
+  const user = useSelector((state) => state.auth.user);
   const count = watch("count");
 
   const handleAddToCart = () => {
@@ -29,10 +31,10 @@ const ProductCard = ({ product, isCart }) => {
     setValue("count", count + 1);
   };
 
-  const handleDeleteCard = () => {
-    dispatch(removeFromCart(product.id));
+  const handleBuyNow = () => {
+    dispatch(addToCart(product));
+    navigate("/cart");
   };
-
   return (
     <Card
       sx={{
@@ -68,17 +70,17 @@ const ProductCard = ({ product, isCart }) => {
           }}
         />
 
-        {!isCart && (
+        {!isCart && user && (
           <IconButton
             sx={{
               position: "absolute",
               bottom: 10,
               right: 10,
-              backgroundColor: "rgba(255, 255, 255, 0.7)",
-              color: "#9b1313",
+              backgroundColor: "var(--shade)",
+              color: "var(--background)",
               "&:hover": {
-                backgroundColor: "#9b1313",
-                color: "rgba(255, 255, 255, 0.7)",
+                backgroundColor: "var(--background)",
+                color: "var(--shade)",
               },
               fontSize: "30px",
             }}
@@ -99,8 +101,8 @@ const ProductCard = ({ product, isCart }) => {
             position: "absolute",
             top: 0,
             left: 0,
-            backgroundColor: "#000",
-            color: "white",
+            backgroundColor: "var(--background-secondary)",
+            color: "var(--text-primary)",
             padding: "4px 8px",
             borderRadius: "4px",
             fontWeight: "bold",
@@ -132,8 +134,8 @@ const ProductCard = ({ product, isCart }) => {
       <CardActions sx={{ justifyContent: "space-between", pt: 1 }}>
         <button
           style={{
-            backgroundColor: "#9b1313",
-            color: "#fff",
+            backgroundColor: "var(--background)",
+            color: "var(--text-primary)",
             padding: "8px 12px",
             border: "none",
             borderRadius: "4px",
@@ -141,19 +143,10 @@ const ProductCard = ({ product, isCart }) => {
             fontWeight: "bold",
             width: "100%",
           }}
+          onClick={handleBuyNow}
         >
           Buy Now
         </button>
-
-        {isCart && (
-          <IconButton
-            color="primary"
-            onClick={handleDeleteCard}
-            title="Remove from Cart"
-          >
-            <DeleteIcon />
-          </IconButton>
-        )}
       </CardActions>
     </Card>
   );

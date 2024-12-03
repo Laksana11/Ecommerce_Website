@@ -34,7 +34,7 @@ const Cart = () => {
         mt: 4,
         borderRadius: 2,
         boxShadow: 3,
-        bgcolor: "#f5f5f5",
+        bgcolor: "var(--card-bgcolor)",
       }}
     >
       <Typography variant="h5" fontWeight="bold" textAlign="center" mb={2}>
@@ -59,7 +59,7 @@ const Cart = () => {
           key={item.id}
           sx={{
             mb: 2,
-            backgroundColor: "white",
+            backgroundColor: "var(--body)",
             borderRadius: 2,
             padding: 2,
             boxShadow: 2,
@@ -186,13 +186,13 @@ const Cart = () => {
         fullWidth
         sx={{
           mt: 2,
-          background: "#b13b3b",
-          borderColor: "#b13b3b",
-          color: "#fff",
+          background: "var(--background)",
+          borderColor: "var(--background)",
+          color: "var(--text-primary)",
           "&:hover": {
-            background: "#fff",
-            borderColor: "#fff",
-            color: "#b13b3b",
+            background: "var(--body)",
+            borderColor: "var(--body)",
+            color: "var(--text-secondary)",
           },
         }}
       >

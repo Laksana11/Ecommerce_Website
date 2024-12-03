@@ -59,7 +59,7 @@ const SignupForm = () => {
           boxShadow: 3,
           padding: 4,
           borderRadius: 2,
-          backgroundColor: "#fff",
+          backgroundColor: "var(--body)",
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom>

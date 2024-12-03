@@ -229,18 +229,6 @@ const ProductList = () => {
             fullWidth
             sx={{
               width: "300px",
-              "& .MuiInputLabel-root": {
-                color: "var(--accent)",
-              },
-              "& .MuiSelect-select": {
-                color: "var(--card-text)",
-              },
-              "& .MuiMenuItem-root": {
-                color: "var(--card-text)",
-              },
-              "& .MuiSelect-icon": {
-                color: "var(--card-text)",
-              },
             }}
           >
             <InputLabel htmlFor="category-select">

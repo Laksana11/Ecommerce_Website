@@ -51,7 +51,7 @@ const LoginForm = () => {
           padding: 4,
           borderRadius: 2,
           boxShadow: 3,
-          backgroundColor: "#fff",
+          backgroundColor: "var(--body)",
           textAlign: "center",
         }}
       >

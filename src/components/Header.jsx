@@ -24,17 +24,6 @@ const Header = () => {
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
-  const [theme, setTheme] = React.useState(
-    document.documentElement.getAttribute("data-theme") || "light"
-  );
-
-  const toggleTheme = () => {
-    const root = document.documentElement;
-    const newTheme = theme === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", newTheme);
-    setTheme(newTheme);
-  };
-
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -56,8 +45,8 @@ const Header = () => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: "var(--background)",
-        color: "white",
+        backgroundColor: "var(--background-secondary)",
+        color: "var(--text-primary)",
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -68,14 +57,11 @@ const Header = () => {
               color: "var(--text-primary)",
             }}
           >
-            E-Commerce App
+            E-Commerce Website
           </Typography>
         </Link>
 
         <Box display="flex" alignItems="center" gap={2}>
-          <IconButton onClick={toggleTheme} color="inherit">
-            {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
           {user ? (
             <>
               <IconButton onClick={handleMenuOpen} color="inherit">
@@ -101,24 +87,24 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Button component={Link} to="/login" color="inherit">
+              <Button component={Link} to="/login" color="var(--text-primary)">
                 Login
               </Button>
-              <Button component={Link} to="/signup" color="inherit">
-                Register
+              <Button component={Link} to="/signup" color="var(--text-primary)">
+                Signup
               </Button>
             </>
           )}
 
           {user && (
             <Link to="/cart">
-              <IconButton color="inherit">
+              <IconButton color="var(--body)">
                 <Badge
                   badgeContent={cart.length}
                   sx={{
                     "& .MuiBadge-badge": {
                       backgroundColor: "var(--background-secondary)",
-                      color: "white",
+                      color: "var(--text-primary)",
                     },
                   }}
                 >
