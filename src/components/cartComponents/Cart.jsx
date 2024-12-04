@@ -144,7 +144,7 @@ const Cart = () => {
                       })
                     )
                   }
-                  inputProps={{
+                  slotProps={{
                     style: { textAlign: "center", width: "40px" },
                   }}
                   sx={{ "& .MuiInputBase-root": { padding: 0 } }}

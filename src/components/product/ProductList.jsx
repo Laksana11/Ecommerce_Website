@@ -27,7 +27,7 @@ import Handbag3 from "../../assets/Luxury Handbag.jpg";
 import Lenova from "../../assets/Lenova Laptop.jpg";
 
 const ProductList = () => {
-  const { register, watch, setValue } = useForm();
+  const { register, watch, setValue, getValues } = useForm();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [subAnchorEl, setSubAnchorEl] = useState(null);
@@ -150,9 +150,11 @@ const ProductList = () => {
       }
     }
 
+    console.log(filtered);
+
     if (selectedCategory && selectedCategory !== "All Categories") {
-      filtered = filtered.filter(
-        (product) => product.category === selectedCategory
+      filtered = filtered.filter((product) =>
+        categories[selectedCategory].some((item) => product.category === item)
       );
     }
 
@@ -166,13 +168,15 @@ const ProductList = () => {
   }, [searchTerm, selectedCategory, selectedSubCategory]);
 
   const handleMainCategoryHover = (event, mainCategory) => {
+    setSelectedCategory(mainCategory);
+    setSelectedSubCategory(null);
     setAnchorEl(event.currentTarget);
     setHoveredMainCategory(mainCategory);
   };
 
   const handleSubCategorySelect = (subCategory) => {
     setSelectedSubCategory(subCategory);
-    setValue("category", subCategory);
+    debugger;
     setAnchorEl(null);
   };
 
@@ -181,7 +185,6 @@ const ProductList = () => {
     if (category === "All Categories") {
       setSelectedSubCategory("");
     }
-    setValue("category", category);
   };
 
   const handleClose = () => {
@@ -209,7 +212,7 @@ const ProductList = () => {
                 opacity: 1,
               },
             }}
-            InputProps={{
+            slotProps={{
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon />
@@ -217,7 +220,7 @@ const ProductList = () => {
               ),
             }}
             type="text"
-            placeholder="Search by name or price"
+            placeholder="Search by Name or Price"
             {...register("search")}
             fullWidth
             variant="outlined"
@@ -242,14 +245,16 @@ const ProductList = () => {
             </InputLabel>
             <Select
               id="category-select"
-              {...register("category")}
               label="Category"
-              value={
-                selectedSubCategory || selectedCategory || "All Categories"
+              value={selectedCategory}
+              renderValue={(selected) =>
+                selectedSubCategory
+                  ? `Selected: ${selectedCategory} - ${selectedSubCategory}`
+                  : `Selected: ${selectedCategory}`
               }
               sx={{
                 "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "var(--accent)",
+                  borderColor: "var(--background)",
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
                   borderColor: "var(--card-text)",
