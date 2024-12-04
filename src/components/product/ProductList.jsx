@@ -176,7 +176,6 @@ const ProductList = () => {
 
   const handleSubCategorySelect = (subCategory) => {
     setSelectedSubCategory(subCategory);
-    debugger;
     setAnchorEl(null);
   };
 
