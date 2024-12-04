@@ -1,4 +1,4 @@
-#install node_modules npm i
+# install node_modules npm install
 
 # npm start -- to start the application
 
